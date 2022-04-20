@@ -59,10 +59,10 @@ void IRAM_ATTR _hspi_slave_isr_handler(void *arg, void *frame)
             _hspi_slave_buffer[32] = 0;
             for(i=0; i<8; i++) {
                 data=SPI1W(i);
-                _hspi_slave_buffer[i<<2] = data & 0xff;
-                _hspi_slave_buffer[(i<<2)+1] = (data >> 8) & 0xff;
-                _hspi_slave_buffer[(i<<2)+2] = (data >> 16) & 0xff;
-                _hspi_slave_buffer[(i<<2)+3] = (data >> 24) & 0xff;
+                _hspi_slave_buffer[i] = data & 0xff;
+                _hspi_slave_buffer[i+1] = (data >> 8) & 0xff;
+                _hspi_slave_buffer[i+2] = (data >> 16) & 0xff;
+                _hspi_slave_buffer[i+3] = (data >> 24) & 0xff;
             }
             _hspi_slave_rx_data_cb(arg, &_hspi_slave_buffer[0], 32);
         }
